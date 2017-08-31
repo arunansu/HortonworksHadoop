@@ -1,0 +1,4 @@
+kafka/spark/cassandra/KafkaStringProducer.class
+kafka/spark/cassandra/KafkaAvroSparkCassandraConsumer.class
+kafka/spark/cassandra/KafkaAvroProducer.class
+kafka/spark/cassandra/KafkaStringConsumer.class
