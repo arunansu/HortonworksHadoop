@@ -56,9 +56,6 @@ public class KafkaAvroSparkCassandraConsumer {
 
         directKafkaStream.foreachRDD(rdd -> {
             rdd.foreach(avroRecord -> {
-                Schema.Parser parser = new Schema.Parser();
-                Schema schema = parser.parse(KafkaAvroProducer.USER_SCHEMA);
-                recordInjection = GenericAvroCodecs.toBinary(schema);
                 GenericRecord record = recordInjection.invert(avroRecord._2).get();
 
                 UUID id = UUID.randomUUID();
