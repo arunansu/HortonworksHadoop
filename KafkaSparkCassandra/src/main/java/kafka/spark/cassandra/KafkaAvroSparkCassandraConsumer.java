@@ -1,7 +1,5 @@
 package kafka.spark.cassandra;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,7 +34,7 @@ public class KafkaAvroSparkCassandraConsumer {
 	    Schema.Parser parser = new Schema.Parser();
 	    Schema schema = parser.parse(KafkaAvroProducer.USER_SCHEMA);
 	    recordInjection = GenericAvroCodecs.toBinary(schema);
-		// Connect to the cluster and keyspace "demo"
+		// Connect to the cluster and keyspace "test"
 	  	cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
 	  	session = cluster.connect("test");
 	}
@@ -61,8 +59,7 @@ public class KafkaAvroSparkCassandraConsumer {
                 UUID id = UUID.randomUUID();
                 String first = record.get("first").toString();
                 String last = record.get("last").toString();
-                String age = record.get("age").toString();
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                int age = Integer.valueOf(record.get("age").toString());
                 Date date = new Date();
                 System.out.println("first= " + first
                         + ", last= " + last
@@ -71,6 +68,7 @@ public class KafkaAvroSparkCassandraConsumer {
                 Insert insert = QueryBuilder
         	            .insertInto("test", "person")
         	            .value("id", id)
+        	            .value("active", true)
         	            .value("first", first)
         	            .value("last", last)
         	            .value("age", age)
@@ -79,6 +77,7 @@ public class KafkaAvroSparkCassandraConsumer {
                 session.execute(insert.toString()).all();
             });
         });
+
         ssc.start();
         ssc.awaitTermination();
 	}
