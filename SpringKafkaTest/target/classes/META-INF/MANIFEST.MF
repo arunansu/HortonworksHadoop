@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: SpringKafkaTest
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: rh656zc
+Implementation-Vendor-Id: SpringKafkaTest
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/SpringKafkaT
+ est/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
