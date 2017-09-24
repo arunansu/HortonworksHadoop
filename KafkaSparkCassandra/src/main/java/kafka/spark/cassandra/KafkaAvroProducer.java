@@ -1,18 +1,17 @@
 package kafka.spark.cassandra;
 
+import java.time.LocalDate;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-
 import com.twitter.bijection.Injection;
 import com.twitter.bijection.avro.GenericAvroCodecs;
-
 public class KafkaAvroProducer {
-	
 	public static final String USER_SCHEMA = "{"
             + "\"type\":\"record\","
             + "\"name\":\"myrecord\","
@@ -46,10 +45,7 @@ public class KafkaAvroProducer {
             producer.send(record);
 
             Thread.sleep(250);
-
         }
-
         producer.close();
 	}
-
 }
